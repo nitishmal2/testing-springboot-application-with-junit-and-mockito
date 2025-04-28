@@ -110,6 +110,13 @@ public class EmployeeControllerTest {
 		.andExpect(jsonPath("$.firstName", is(employee.getFirstName())))
 		.andExpect(jsonPath("$.lastName", is(employee.getLastName())))
 		.andExpect(jsonPath("$.email",is(employee.getEmail())));
+		esultActions response = mockMvc.perform(get("/api/v1/employees/{id}", employee.getId()));
+		// then - verify the output
+		response.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.firstName", is(employee.getFirstName())))
+		.andExpect(jsonPath("$.lastName", is(employee.getLastName())))
+		.andExpect(jsonPath("$.email",is(employee.getEmail())));
 
 		
 		
